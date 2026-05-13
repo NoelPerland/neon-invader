@@ -1,0 +1,121 @@
+{
+  "titleTexts": [
+    "Neon Invader",
+    "NEON ARCADE DEFENSE // 5-WAVE RUN",
+    "HIGH SCORE 00000",
+    "ARROWS TO MOVE  //  HOLD SPACE TO FIRE",
+    "ROUND POWER-UPS HELP  //  RED SHOTS HURT",
+    "RAPID FIRE  //  DOUBLE SHOT  //  SHIELD",
+    "PRESS M TO TOGGLE AUDIO",
+    "AUDIO STARTS ON PLAY",
+    "PRESS SPACE OR ENTER",
+    "START RUN"
+  ],
+  "titleAudio": {
+    "contextState": "suspended",
+    "musicMode": "title",
+    "lastMusicTickAt": 0
+  },
+  "gameTextsWhenPowerUpSeen": [
+    "ARROWS MOVE   //   SPACE FIRE   //   M AUDIO",
+    "SCORE 00070",
+    "HIGH 00070",
+    "LIVES 03",
+    "WAVE 01",
+    "M AUDIO ON",
+    "POWER",
+    "NONE",
+    "NEW HIGH SCORE",
+    "RAPID FIRE"
+  ],
+  "gameStateWhenPowerUpSeen": {
+    "score": 70,
+    "highScore": 70,
+    "lives": 3,
+    "wave": 1,
+    "activePowerUp": null,
+    "transitioning": false,
+    "ending": false,
+    "playerX": 480,
+    "playerY": 568,
+    "activeEnemyCount": 24,
+    "activePlayerBullets": 1,
+    "activeEnemyBullets": 1,
+    "activePowerUps": 1,
+    "firstPowerUp": {
+      "x": 460.95284937895343,
+      "y": 206.92063999999996,
+      "type": "rapid-fire"
+    },
+    "lowestPowerUp": {
+      "x": 460.95284937895343,
+      "y": 206.92063999999996,
+      "type": "rapid-fire"
+    }
+  },
+  "dangerHintSeen": true,
+  "collectibleHintSeen": false,
+  "collected": true,
+  "gameStateAfterCollect": {
+    "score": 90,
+    "highScore": 90,
+    "lives": 3,
+    "wave": 1,
+    "activePowerUp": "rapid-fire",
+    "transitioning": false,
+    "ending": false,
+    "playerX": 480,
+    "playerY": 568,
+    "activeEnemyCount": 23,
+    "activePlayerBullets": 3,
+    "activeEnemyBullets": 1,
+    "activePowerUps": 0,
+    "firstPowerUp": null,
+    "lowestPowerUp": null
+  },
+  "textsAfterCollect": [
+    "ARROWS MOVE   //   SPACE FIRE   //   M AUDIO",
+    "SCORE 00090",
+    "HIGH 00090",
+    "LIVES 03",
+    "WAVE 01",
+    "M AUDIO ON",
+    "POWER",
+    "RAPID FIRE 7.9S",
+    "NEW HIGH SCORE",
+    "RAPID FIRE",
+    "RAPID FIRE"
+  ],
+  "gameOverTexts": [
+    "GAME OVER",
+    "DEFENSE GRID LOST",
+    "SCORE 00420",
+    "HIGH SCORE 00420",
+    "LAST WAVE 01",
+    "NEW HIGH SCORE",
+    "RESTART",
+    "TITLE",
+    "CLICK A BUTTON OR USE SPACE / ENTER / ESC",
+    "M AUDIO ON"
+  ],
+  "restartedGameState": {
+    "score": 0,
+    "highScore": 420,
+    "lives": 3,
+    "wave": 1,
+    "activePowerUp": null,
+    "transitioning": false,
+    "ending": false,
+    "playerX": 480,
+    "playerY": 568,
+    "activeEnemyCount": 28,
+    "activePlayerBullets": 0,
+    "activeEnemyBullets": 0,
+    "activePowerUps": 0,
+    "firstPowerUp": null,
+    "lowestPowerUp": null
+  },
+  "mutedState": true,
+  "unmutedState": false,
+  "hitCount": 3
+}
