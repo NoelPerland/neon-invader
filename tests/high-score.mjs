@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import ts from 'typescript';
+const source=(await readFile(new URL('../src/utils/highScore.ts',import.meta.url),'utf8')).replace("import { STORAGE_KEYS } from '../config/app';", "const STORAGE_KEYS={HIGH_SCORE:'score'};");
+const compiled=ts.transpileModule(source,{compilerOptions:{target:ts.ScriptTarget.ES2023,module:ts.ModuleKind.ESNext}});
+const scores=await import(`data:text/javascript;base64,${Buffer.from(compiled.outputText).toString('base64')}`);
+const data=new Map([['score','120']]);
+globalThis.window={localStorage:{getItem:key=>data.get(key),setItem:(key,value)=>data.set(key,value)}};
+assert.equal(scores.getStoredHighScore(),120);
+assert.equal(scores.updateStoredHighScore(NaN),120);
+assert.equal(data.get('score'),'120');
+Object.defineProperty(window,'localStorage',{get(){throw new Error('SecurityError');}});
+assert.equal(scores.updateStoredHighScore(250),250);
+assert.equal(scores.getStoredHighScore(),250);
+assert.equal(scores.updateStoredHighScore(50),250);
+assert.equal(scores.updateStoredHighScore(Infinity),250);
+console.log('PASS: high scores survive blocked storage during session; invalid scores cannot erase best.');

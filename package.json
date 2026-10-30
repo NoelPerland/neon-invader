@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "node tests/touch-controls.mjs",
+    "test": "node tests/touch-controls.mjs && node tests/high-score.mjs",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "npm run build && node server.js"
+    "start": "npm run build && node server.js",
+    "verify:progression": "node tests/progression.mjs"
   },
   "devDependencies": {
+    "playwright-core": "^1.64.1",
     "typescript": "~5.9.3",
     "vite": "^8.0.1"
   },

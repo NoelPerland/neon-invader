@@ -69,3 +69,9 @@ Most gameplay tuning is centralized in `src/config/balance.ts`, including:
 - player firing behavior
 - power-up duration and drop weights
 - transition and effect timings
+
+## Portable outcome regression
+
+Run `npm run verify:progression` after `npm ci`. It starts its own local development server and closes server/browser on completion. Set `CHROME_PATH` to your Chrome/Chromium executable (default: standard Windows Chrome location).
+
+The check exercises actual simultaneous touch movement/fire, then uses the existing development-only helpers to clear all five waves, verify victory/retry and verify defeat. This is outcome-flow coverage, not an unassisted campaign win or difficulty evaluation. No helper is enabled in production builds.

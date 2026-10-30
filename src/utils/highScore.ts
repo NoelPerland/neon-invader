@@ -1,5 +1,7 @@
 import { STORAGE_KEYS } from '../config/app';
 
+let sessionHighScore = 0;
+
 const sanitizeHighScore = (value: unknown): number => {
   if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
     return 0;
@@ -10,23 +12,25 @@ const sanitizeHighScore = (value: unknown): number => {
 
 export const getStoredHighScore = (): number => {
   if (typeof window === 'undefined') {
-    return 0;
+    return sessionHighScore;
   }
 
   try {
     const raw = window.localStorage.getItem(STORAGE_KEYS.HIGH_SCORE);
     if (!raw) {
-      return 0;
+      return sessionHighScore;
     }
 
-    return sanitizeHighScore(Number(raw));
+    sessionHighScore = Math.max(sessionHighScore, sanitizeHighScore(Number(raw)));
+    return sessionHighScore;
   } catch {
-    return 0;
+    return sessionHighScore;
   }
 };
 
 export const setStoredHighScore = (score: number): number => {
   const nextScore = sanitizeHighScore(score);
+  sessionHighScore = nextScore;
 
   if (typeof window === 'undefined') {
     return nextScore;
@@ -43,7 +47,7 @@ export const setStoredHighScore = (score: number): number => {
 
 export const updateStoredHighScore = (score: number): number => {
   const current = getStoredHighScore();
-  if (score <= current) {
+  if (sanitizeHighScore(score) <= current) {
     return current;
   }
 

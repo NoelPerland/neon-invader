@@ -146,9 +146,13 @@ export class GameOverScene extends Phaser.Scene {
       .setOrigin(0.5);
     this.updateAudioStatus();
 
+    this.input.keyboard?.off('keydown-ENTER', this.restartGame, this);
+    this.input.keyboard?.off('keydown-SPACE', this.restartGame, this);
     this.input.keyboard?.off('keydown-R', this.restartGame, this);
     this.input.keyboard?.off('keydown-ESC', this.returnToTitle, this);
     this.input.keyboard?.off('keydown-M', this.toggleMute, this);
+    this.input.keyboard?.on('keydown-ENTER', this.restartGame, this);
+    this.input.keyboard?.on('keydown-SPACE', this.restartGame, this);
     this.input.keyboard?.on('keydown-R', this.restartGame, this);
     this.input.keyboard?.on('keydown-ESC', this.returnToTitle, this);
     this.input.keyboard?.on('keydown-M', this.toggleMute, this);
