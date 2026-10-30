@@ -24,13 +24,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     body.setSize(this.width * 0.86, this.height * 0.78, true);
   }
 
-  updateFromInput(cursors: Phaser.Types.Input.Keyboard.CursorKeys): void {
+  updateFromInput(cursors: Phaser.Types.Input.Keyboard.CursorKeys, touchDirection = 0): void {
     const body = this.body as Phaser.Physics.Arcade.Body;
     let velocityX = 0;
 
-    if (cursors.left?.isDown) {
+    if (cursors.left?.isDown || touchDirection < 0) {
       velocityX = -PLAYER_SETTINGS.speed;
-    } else if (cursors.right?.isDown) {
+    } else if (cursors.right?.isDown || touchDirection > 0) {
       velocityX = PLAYER_SETTINGS.speed;
     }
 

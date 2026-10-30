@@ -6,6 +6,7 @@ import { HUD_FONT_FAMILY, PALETTE } from '../config/theme';
 import { BackgroundSystem } from '../systems/BackgroundSystem';
 import { formatScore, formatWave } from '../utils/format';
 import type { GameOverData } from '../types/game';
+import { showSceneActions } from '../ui/sceneActions';
 
 export class GameOverScene extends Phaser.Scene {
   private readonly background = new BackgroundSystem(this);
@@ -36,6 +37,10 @@ export class GameOverScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, showSceneActions([
+      ['Play again', () => this.restartGame()],
+      ['Main menu', () => this.returnToTitle()],
+    ]));
     this.restartQueued = false;
     this.background.create();
     getAudioManager().setMusicMode('game-over');

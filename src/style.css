@@ -27,9 +27,11 @@ body {
 .shell {
   min-height: 100vh;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
-  gap: 18px;
-  padding: 28px 16px 24px;
+  gap: 12px;
+  padding: 16px;
+  align-content: center;
 }
 
 .shell__header,
@@ -39,7 +41,7 @@ body {
 
 .shell__header h1 {
   margin: 4px 0 8px;
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #58f2ff;
@@ -63,7 +65,8 @@ body {
 
 .frame {
   position: relative;
-  width: min(100%, 1080px);
+  width: min(100%, 1080px, calc((100svh - 300px) * 1.5));
+  min-width: 0;
   display: flex;
   justify-content: center;
   padding: 18px;
@@ -89,16 +92,43 @@ body {
 
 .game-root {
   width: min(100%, 960px);
+  min-width: 0;
+  aspect-ratio: 3 / 2;
 }
 
 .game-root canvas {
   width: 100%;
   height: auto;
   display: block;
+  max-width: 100%;
   border-radius: 16px;
   image-rendering: pixelated;
   box-shadow: 0 0 0 1px rgba(88, 242, 255, 0.08);
 }
+
+.touch-controls, .scene-actions {
+  display: flex;
+  gap: 12px;
+  width: min(100%, 540px);
+  touch-action: none;
+}
+.touch-controls[hidden], .scene-actions[hidden] { display: none; }
+.touch-controls button, .scene-actions button {
+  flex: 1;
+  min-height: 64px;
+  border: 1px solid #58f2ff;
+  border-radius: 14px;
+  background: #10233b;
+  color: #effcff;
+  font: bold 18px 'Trebuchet MS', sans-serif;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.touch-controls button:last-child { flex: 1.5; background: #3d1744; border-color: #ff54d9; }
+.touch-controls button.held { background: #258494; transform: translateY(2px); }
+.touch-controls button:focus-visible { outline: 3px solid white; outline-offset: 3px; }
+.scene-actions button { background: #164955; }
 
 @media (max-width: 900px) {
   .shell {
@@ -114,4 +144,12 @@ body {
     inset: 6px;
     border-radius: 14px;
   }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .shell { gap: 6px; padding: 6px; }
+  .shell__kicker, .shell__copy, .shell__footer { display: none; }
+  .shell__header h1 { font-size: 22px; margin: 0; }
+  .frame { width: min(100%, 1080px, calc((100svh - 115px) * 1.5)); padding: 6px; }
+  .touch-controls button, .scene-actions button { min-height: 48px; }
 }

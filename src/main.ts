@@ -9,14 +9,20 @@ import { SCENE_KEYS } from './config/app';
 document.querySelector<HTMLDivElement>(`#${DOM_IDS.APP}`)!.innerHTML = `
   <main class="shell">
     <div class="shell__header">
-      <p class="shell__kicker">Browser Arcade MVP</p>
+      <p class="shell__kicker">Browser Arcade</p>
       <h1>${GAME_TITLE}</h1>
       <p class="shell__copy">Neon-lit wave defense built with Phaser 3, TypeScript, and Vite.</p>
     </div>
     <section class="frame">
       <div id="${DOM_IDS.ROOT}" class="game-root" aria-label="${GAME_TITLE} game canvas"></div>
     </section>
-    <p class="shell__footer">Arrow keys move. Hold Space to fire. Defeat five waves to win.</p>
+    <div class="scene-actions" hidden aria-label="Game actions"></div>
+    <div class="touch-controls" hidden aria-label="Touch game controls">
+      <button type="button" data-input="left" aria-label="Move left">◀</button>
+      <button type="button" data-input="right" aria-label="Move right">▶</button>
+      <button type="button" data-input="fire" aria-label="Hold to fire">FIRE</button>
+    </div>
+    <p class="shell__footer">Arrow keys or buttons move. Hold Space or FIRE to shoot. Defeat five waves to win.</p>
   </main>
 `;
 

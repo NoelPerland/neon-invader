@@ -20,6 +20,7 @@ import { PowerUp } from '../entities/PowerUp';
 import { BackgroundSystem } from '../systems/BackgroundSystem';
 import { WaveFormation } from '../systems/WaveFormation';
 import { Hud } from '../ui/Hud';
+import { createTouchControls } from '../ui/touchControls';
 import { getStoredHighScore, updateStoredHighScore } from '../utils/highScore';
 import { chooseWeighted } from '../utils/random';
 import type { EnemyRank, GameResult, PowerUpType, SessionState, WaveConfig } from '../types/game';
@@ -40,6 +41,8 @@ export class GameScene extends Phaser.Scene {
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
   private shootKey!: Phaser.Input.Keyboard.Key;
+
+  private touchControls!: ReturnType<typeof createTouchControls>;
 
   private enemyGroup!: Phaser.Physics.Arcade.Group;
 
@@ -97,6 +100,8 @@ export class GameScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.touchControls = createTouchControls();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.touchControls.destroy());
     this.background.create();
     this.audioManager.setMusicMode('game');
     this.physics.world.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -174,7 +179,7 @@ export class GameScene extends Phaser.Scene {
       return;
     }
 
-    this.player.updateFromInput(this.cursors);
+    this.player.updateFromInput(this.cursors, Number(this.touchControls.state.right) - Number(this.touchControls.state.left));
     this.player.updateDamageFlash(time);
     this.updateShieldVisual(time);
     this.updatePowerUpTimers(time);
@@ -265,7 +270,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   private handlePlayerFire(time: number): void {
-    if (this.transitioning || !this.shootKey.isDown) {
+    if (this.transitioning || (!this.shootKey.isDown && !this.touchControls.state.fire)) {
       return;
     }
 

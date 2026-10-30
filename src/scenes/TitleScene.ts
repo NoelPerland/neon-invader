@@ -5,6 +5,7 @@ import { TEXTURES } from '../assets/assetKeys';
 import { GAME_TITLE, GAME_WIDTH, SCENE_KEYS } from '../config/app';
 import { HUD_FONT_FAMILY, PALETTE } from '../config/theme';
 import { BackgroundSystem } from '../systems/BackgroundSystem';
+import { showSceneActions } from '../ui/sceneActions';
 
 export class TitleScene extends Phaser.Scene {
   private readonly background = new BackgroundSystem(this);
@@ -18,6 +19,7 @@ export class TitleScene extends Phaser.Scene {
   }
 
   create(): void {
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, showSceneActions([['Play', () => void this.startGame()]]));
     this.starting = false;
     this.background.create();
     getAudioManager().setMusicMode('title');
